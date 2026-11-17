@@ -235,7 +235,7 @@ async def main():
         o = await get_owner(db)
         if o is None:
             print("NOOWNER"); return
-        print("TOKEN=" + await create_admin_token(o.id, o.username))
+        print("TOKEN=" + await create_admin_token(o.id, o.username, o.hashed_password))
 asyncio.run(main())
 """
 
