@@ -21,11 +21,11 @@ DAY = 86400
 # ?ed=2560 = early data: the first packet rides on the handshake -> one round trip less per connection.
 INBOUNDS = [
     # tag              proto     port  net            server path                                   fp         name       group
-    ("JX-VLESS-WS-1", "vless",  10001, "ws",          "/ws/",     "chrome",  "𝗣𝗿𝗼",        "pro"),
-    ("JX-VLESS-WS-2", "vless",  10002, "ws",          "/stream/", "firefox", "⚡ 𝗙𝗹𝗮𝘀𝗵",    "std"),
-    ("JX-TROJAN-WS",  "trojan", 10003, "ws",          "/live/",   "safari",  "🔥 𝗙𝗶𝗿𝗲",     "std"),
-    ("JX-VMESS-WS",   "vmess",  10004, "ws",          "/gw/",    "edge",    "💎 𝗗𝗶𝗮𝗺𝗼𝗻𝗱", "std"),
-    ("JX-VLESS-HU",   "vless",  10005, "httpupgrade", "/cdn/",    "ios",     "🌙 𝗡𝗶𝗴𝗵𝘁",    "std"),
+    ("JX-VLESS-WS-1", "vless",  10001, "ws",          "/ws/",     "chrome",  "AbyssTunnel🇳🇱", "pro"),
+    ("JX-VLESS-WS-2", "vless",  10002, "ws",          "/stream/", "firefox", "AbyssTunnel🇳🇱", "std"),
+    ("JX-TROJAN-WS",  "trojan", 10003, "ws",          "/live/",   "safari",  "AbyssTunnel🇳🇱", "std"),
+    ("JX-VMESS-WS",   "vmess",  10004, "ws",          "/gw/",    "edge",    "AbyssTunnel🇳🇱", "std"),
+    ("JX-VLESS-HU",   "vless",  10005, "httpupgrade", "/cdn/",    "ios",     "AbyssTunnel🇳🇱", "std"),
 ]
 EARLY_DATA = "?ed=2560"
 # real paths are unique per install (genpaths.py writes them to the volume before nginx starts)
@@ -390,7 +390,7 @@ def ensure_hosts():
             req("DELETE", f"/api/host/{h['id']}")
     changed = 0
     for idx, (tag, proto, port, net, path, fp, name, grp) in enumerate(INBOUNDS):
-        body = {"remark": f"{name} | {TITLE}", "allowinsecure": False, "address": [DOMAIN], "inbound_tag": tag,
+        body = {"remark": name, "allowinsecure": False, "address": [DOMAIN], "inbound_tag": tag,
                 "port": 443, "sni": [DOMAIN], "host": [DOMAIN], "path": path + EARLY_DATA, "security": "tls",
                 "alpn": ["http/1.1"], "fingerprint": fp, "priority": idx + 1, "is_disabled": False}
         mine = [h for h in existing if h.get("inbound_tag") == tag]
